@@ -1,0 +1,14 @@
+<div class="container" *ngFor="let educacion of educacionLista">
+    <div class="row">
+        <div class="col-4">{{educacion.tituloEducacion}}</div>
+        <div class="col-4">{{educacion.descripcionEducacion}}</div>
+        <div class="col-4">{{educacion.periodo}}</div>
+        <div class="row">
+            <div>
+                <img src="{{educacion.imagenEducacion}}" alt="">
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
