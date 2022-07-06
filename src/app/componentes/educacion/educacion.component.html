@@ -1,14 +1,23 @@
 <div class="container" *ngFor="let educacion of educacionLista">
-    <div class="row">
-        <div class="col-4">{{educacion.tituloEducacion}}</div>
-        <div class="col-4">{{educacion.descripcionEducacion}}</div>
-        <div class="col-4">{{educacion.periodo}}</div>
-        <div class="row">
-            <div>
-                <img src="{{educacion.imagenEducacion}}" alt="">
-            </div>
-        </div>
-        
-        
+  <div class="row">
+    
+    <div class="col-3">
+      <img src="{{ educacion.imagenEducacion }}" alt="" />
     </div>
+    <div class="col-3">{{ educacion.descripcionEducacion }}</div>
+    <div class="col-2">{{ educacion.periodo }}</div>
+    <div class="col-2">{{ educacion.tituloEducacion }}</div>
+    <div class="col-2">
+        <a href="#" class="btn btn-primary tooltips" 
+        data-placement="top"
+        data-toogle="tooltip"
+        data-origin-title="Editar">
+    <i class="fa fa-pencil"></i></a>
+    <a href="#" class="btn btn-danger tooltips" 
+    data-placement="top"
+    data-toogle="tooltip"
+    data-origin-title="Delete">
+<i class="fa fa-times"></i></a>
+    </div>
+  </div>
 </div>
