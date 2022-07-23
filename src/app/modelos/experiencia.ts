@@ -1,5 +1,5 @@
 export interface Experiencia {
-    idExperiencia:string;    
+    idExperiencia:number;    
     tituloExperiencia:string;
     fecha:string;
     descripcionExperiencia:string;

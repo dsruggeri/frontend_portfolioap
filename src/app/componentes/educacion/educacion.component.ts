@@ -15,6 +15,8 @@ export class EducacionComponent implements OnInit {
   public editEducacion:Educacion | undefined;
   public deleteEducacion:Educacion | undefined;
 
+  
+
   constructor(private educacionService:EducacionService) { }
 
   ngOnInit(): void {
@@ -33,21 +35,23 @@ export class EducacionComponent implements OnInit {
   }
 
   public onOpenModal(mode:String, educacion?:Educacion):void{
+    
     const container=document.getElementById('main-container');
     const button=document.createElement('button');
     button.style.display='none';
-    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-bs-toggle', 'modal');
     if(mode==='add'){
-      button.setAttribute('data-target','#addEducacionModal');
+      button.setAttribute('data-bs-target','#addEducacionModal');
     } else if(mode==='delete'){
       this.deleteEducacion=educacion;
-      button.setAttribute('data-taget', '#deleteEducacionModal');
+      button.setAttribute('data-bs-taget','#deleteEducacionModal');
     } else if(mode==='edit'){
       this.editEducacion=educacion;
-      button.setAttribute('data-taget', '#editEducacionModal');
+      button.setAttribute('data-bs-taget','#editEducacionModal');
     }  
     container?.appendChild(button);
     button.click();
+
   }
 
   public onAddEducacion(addForm: NgForm){
@@ -56,13 +60,15 @@ export class EducacionComponent implements OnInit {
       next: (response:Educacion) =>{
         console.log(response);
         this.getEducacion();
-        addForm.reset();
+        addForm.resetForm();
       },
       error:(error:HttpErrorResponse)=>{
         alert(error.message);
         addForm.reset();
       }
     })
+
+    console.log('salió del service');
   }
 
   public onEditEducacion(educacion:Educacion){
@@ -76,16 +82,16 @@ export class EducacionComponent implements OnInit {
       },
       error:(error:HttpErrorResponse)=>{
         alert(error.message);
+        
       }
     })
   }
 
-  public onDeleteEducacion(idEducacion:string):void{
+  public onDeleteEducacion(idEducacion:number):void{
     this.educacionService.deleteEducacion(idEducacion).subscribe({
       next: (response:void) =>{
         console.log(response);
-        this.getEducacion();
-        
+        this.getEducacion(); 
       },
       error:(error:HttpErrorResponse)=>{
         alert(error.message);

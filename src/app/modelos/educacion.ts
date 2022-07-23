@@ -1,7 +1,10 @@
+
+
 export interface Educacion{
-    idEducacion:string;
+    idEducacion:number;
     tituloEducacion:string;
     periodo:string;
     descripcionEducacion:string;
     imagenEducacion:string;
+
 }

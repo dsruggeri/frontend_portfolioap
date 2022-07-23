@@ -1,5 +1,5 @@
 export interface Habilidad {
-    idHabilidad:string;
+    idHabilidad:number;
     tituloHabilidad:string;
     nivel:number;
     descripcionHabilidad:string;

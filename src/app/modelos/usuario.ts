@@ -1,8 +1,10 @@
 export interface Usuario{
-    id:string;
+    id:number;
     nombre:string;
     apellido:string;
     titulo:string;
     descripcion:string;
     fotoPerfil:string;
+
+    
 }
