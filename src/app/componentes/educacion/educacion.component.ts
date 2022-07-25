@@ -23,6 +23,8 @@ export class EducacionComponent implements OnInit {
     this.getEducacion();
   }
 
+
+
   public getEducacion():void{
     this.educacionService.getEducacion().subscribe({
       next:(Response:Educacion[]) =>{
@@ -64,7 +66,7 @@ export class EducacionComponent implements OnInit {
       },
       error:(error:HttpErrorResponse)=>{
         alert(error.message);
-        addForm.reset();
+        
       }
     })
 

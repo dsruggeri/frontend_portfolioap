@@ -1,0 +1,289 @@
+<div class="container">
+    <div class="row">
+      <div class="col-2"><h2>Habilidad</h2></div>
+      <div class="col-10">
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="onOpenModal('add')"
+          data-bs-toggle="modal"
+          data-bs-target="#addHabilidadModal"
+        >
+          <a class="nav-link" style="color: rgb(221, 222, 237)">
+            Añadir Habilidad <span class="sr-only">(current)</span>
+          </a>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="container" *ngFor="let habilidad of habilidadLista">
+    <div class="row">
+      <div class="col-3">
+        <img src="{{ habilidad.imagenHabilidad }}" alt="" />
+      </div>
+      <div class="col-3">{{ habilidad.tituloHabilidad }}</div>
+      <div class="col-2">{{ habilidad.nivel }}</div>
+      <div class="col-2">{{ habilidad.descripcionHabilidad }}</div>
+      <div class="col-2">
+        <a
+          (click)="onOpenModal('edit', habilidad)"
+          class="btn btn-primary tooltips"
+          data-placement="top"
+          data-bs-target="#editHabilidadModal"
+          data-bs-toggle="modal"
+          data-toogle="tooltip"
+          data-origin-title="Editar"
+        >
+          <i class="fa fa-pencil"></i>
+        </a>
+        <a
+          (click)="onOpenModal('delete', habilidad)"
+          class="btn btn-danger tooltips"
+          data-placement="top"
+          data-toogle="tooltip"
+          data-bs-target="#deleteHabilidadModal"
+          data-bs-toggle="modal"
+          data-origin-title="Delete"
+        >
+          <i class="fa fa-times"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL AÑADIR HABILIDAD -->
+<div
+class="modal"
+id="addHabilidadModal"
+tabindex="-1"
+role="dialog"
+aria-labelledby="addHabilidadLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="addHabilidadModalLabel">
+        Añadir Habilidad
+      </h5>
+      <button
+        type="button"
+        class="close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      >X</button>
+    </div>
+    <div class="modal-body">
+      <form #addForm="ngForm" (ngSubmit)="onAddHabilidad(addForm)">
+        <div class="form-group">
+          <label for="tituloHabilidad">Título:</label>
+          <input
+            type="text"
+            ngModel
+            name="tituloHabilidad"
+            class="form-control"
+            id="tituloHabilidad"
+            placeholder="Título..."
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="periodo">Nivel:</label>
+          <input
+            type="number"
+            ngModel
+            name="nivel"
+            class="form-control"
+            id="nivel"
+            placeholder="Nivel:"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="descripcionHabilidad">Descripción:</label>
+          <input
+            type="text"
+            ngModel
+            name="descripcionHabilidad"
+            class="form-control"
+            id="descripcionHabilidad"
+            placeholder="Descripción..."
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="imagenHabilidad">Url de la imagen:</label>
+          <input
+            type="text"
+            ngModel
+            name="imagenHabilidad"
+            class="form-control"
+            id="imagenHabilidad"
+            placeholder="URL..."
+          />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cerrar
+          </button>
+          <button
+            (click)="onAddHabilidad(addForm.value)"
+            id="add-habilidad-form"
+            [disabled]="addForm.invalid"
+            type="submit"
+            class="btn btn-primary"
+          >
+            Añadir
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- MODAL EDITAR HABILIDAD -->
+<div
+  class="modal"
+  id="editHabilidadModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="habilidadEditModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editHabilidadModalLabel">
+          Editar {{ editHabilidad?.tituloHabilidad }}
+        </h5>
+        <button
+          class="close"
+          type="button"
+          data-bs-dismiss="modal"
+          aria-label="close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <input
+            type="hidden"
+            ngModel="{{ editHabilidad?.idHabilidad }}"
+            class="form-control"
+            id="idHabilidad"
+            placeholder=""
+          />
+          <div class="form-group">
+            <label for="tituloHabilidad">Título</label>
+            <input
+              type="text"
+              ngModel="{{ editHabilidad?.tituloHabilidad}}"
+              name="tituloHabilidad"
+              class="form-control"
+              id="tituloHabilidad"
+              placeholder="Título"
+            />
+          </div>
+          <div class="form-group">
+            <label for="nivel">Nivel</label>
+            <input
+              type="text"
+              ngModel="{{ editHabilidad?.nivel }}"
+              name="nivel"
+              class="form-control"
+              id="nivel"
+              placeholder="{{editHabilidad?.nivel}}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="descripcionHabilidad">Descripción</label>
+            <input
+              type="text"
+              ngModel="{{ editHabilidad?.descripcionHabilidad}}"
+              name="descripcionHabilidad"
+              class="form-control"
+              id="descripcionHabilidad"
+              placeholder="{{ editHabilidad?.descripcionHabilidad }}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="imagenHabilidad">Url de la imagen</label>
+            <input
+              type="text"
+              ngModel="{{ editHabilidad?.imagenHabilidad }}"
+              name="imagenHabilidad"
+              class="form-control"
+              id="imagenHabilidad"
+              placeholder="{{ editHabilidad?.imagenHabilidad }}"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              id=""
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button
+              (click)="onEditHabilidad(editForm.value)"
+              data-bs-dismiss="modal"
+              class="btn btn-primary"
+            >
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ELIMINAR HABILIDAD -->
+
+<div
+  class="modal fade"
+  data-bs-toggle="modal"
+  id="deleteHabilidadModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="deleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Eliminar</h5>
+        <button
+          class="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="close"
+        >
+          <span aria-hidden="true">X</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Vas a eliminar {{ deleteHabilidad?.tituloHabilidad }}.¿Seguro?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-dismiss="modal">NO</button>
+        <button
+          class="btn btn-danger"
+          (click)="onDeleteHabilidad(deleteHabilidad!.idHabilidad)"
+          data-bs-dismiss="modal"
+        >
+          SI
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

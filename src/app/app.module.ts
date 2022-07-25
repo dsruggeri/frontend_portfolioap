@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { FormsModule } from '@angular/forms';
 import { EducacionComponent } from './componentes/educacion/educacion.component';
+import { HabilidadComponent } from './componentes/habilidad/habilidad.component';
+import { ExperienciaComponent } from './componentes/experiencia/experiencia.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    EducacionComponent
+    EducacionComponent,
+    HabilidadComponent,
+    ExperienciaComponent
   ],
   imports: [
     BrowserModule,
