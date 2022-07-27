@@ -1,6 +1,96 @@
-<div *ngIf="usuario">
-    <h1>{{usuario.nombre}}</h1>
+<!--botón a ModalLogin! /// cambia cuando se desloguea /// se muestra o no con "ngIf=""!isLogged"-->
+<!--                                el otro boton va con (click)="onLogout()"; y lo muesto si ngIf="isLogged""-->
+
+<div class="container fondo-banner">
+  <div class="row">
+    <div>
+      <nav class="navbar navbar-dark navbar-expand-md fixed-top">
+        <div class="container">
+          <a
+            href="https://argentinaprograma.inti.gob.ar/"
+            target="blank"
+            class="navbar-brand"
+          >
+            <img
+              src="https://res.cloudinary.com/dsruggeri/image/upload/v1658878562/portfolioAP/argentina_programa_logo_mefli2.png"
+              alt="Argentina Programa"
+              width="130"
+              height="auto"
+          /></a>
+
+          <button
+            type="button"
+            class="navbar-toggler"
+            data-toggle="collapse"
+            data-target="#menu-principal"
+            aria-controls="menu-principal"
+            aria-expanded="false"
+            aria-label="Desplegar menú"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div
+            class="collpase navbar-collapse d-flex justify-content-end"
+            id="menu-principal"
+          >
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item p-3">
+                <a
+                  href="https://github.com/dsruggeri"
+                  class="nav-link"
+                  target="_blank"
+                >
+                  <img
+                    src="https://res.cloudinary.com/dsruggeri/image/upload/v1658878562/portfolioAP/github_logo_vcsdh8.png"
+                    alt="Github"
+                    width="40"
+                    height="auto"
+                    class="rounded"
+                  />
+                </a>
+              </li>
+              <li class="nav-item p-3">
+                <a class="nav-link" href="#">
+                  <img
+                    src="https://res.cloudinary.com/dsruggeri/image/upload/v1658878562/portfolioAP/linkedin_logo_ebjzih.png"
+                    alt="LinkedIn"
+                    width="40"
+                    height="auto"
+                    class="rounded"
+                  />
+                </a>
+              </li>
+              <li *ngIf="!isLogged" class="nav-item p-3">
+                <button
+                  type="button"
+                  class="btn"
+                  (click)="onOpenModal('login')"
+                  data-bs-toggle="modal"
+                  bata-bs-target="#loginModal"
+                >
+                  <a class="nav-link btn btn-lg btn-dark"> Login </a>
+                </button>
+              </li>
+              <li *ngIf="isLogged" class="nav-item p-3">
+                <button type="button" class="btn" (click)="onLogout()">
+                  <a class="nav-link btn btn-lg btn-dark"> Cerrar Sesión </a>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4" *ngIf="usuario">
+        <img class="m-4" src="{{ usuario.fotoPerfil }}" alt="Diego Ruggeri">
+    </div>
+    <div class="col-8" *ngIf="usuario">
+        <h1>{{ usuario.nombre }} {{ usuario.apellido }}</h1>
+        
+    </div>
+  </div>
 </div>
-<div *ngIf="usuario">
-    <img src="{{usuario.fotoPerfil}}" alt="">
-</div>
+

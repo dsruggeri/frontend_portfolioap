@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { EducacionComponent } from './componentes/educacion/educacion.component';
 import { HabilidadComponent } from './componentes/habilidad/habilidad.component';
 import { ExperienciaComponent } from './componentes/experiencia/experiencia.component';
+import { LoginComponent } from './componentes/login/login.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ExperienciaComponent } from './componentes/experiencia/experiencia.comp
     HeaderComponent,
     EducacionComponent,
     HabilidadComponent,
-    ExperienciaComponent
+    ExperienciaComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
