@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg mb-0" style="background-color: #01348e;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="https://argentinaprograma.inti.gob.ar/"
+        target="blank">
+          <img src="https://res.cloudinary.com/dsruggeri/image/upload/v1658878562/portfolioAP/argentina_programa_logo_mefli2.png" alt="Argentina Programa" width="120"  class="d-inline-block align-text-top">
+        </a>
+        
+      </div>
+      
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/dsruggeri" target="blank"><i class="fa fa-github fa-2x" style="color:white;"></i> </a>
+        </li>        
+        <li class="nav-item">
+            <a class="nav-link" href="#" target="blank"><i class="fa fa-linkedin fa-2x" style="color:white;"></i> </a>
+          </li>
+        
+        <li class="nav-item" *ngIf="isGuest">
+            <a class="nav-link"  routerLink="/login"><i class="fa fa-user fa-2x" style="color:white;"></i></a>
+          </li>
+          
+          <li class="nav-item" *ngIf="!isGuest" (click)="onLogOut()">
+            <a class="nav-link" style="cursor: pointer;" [routerLink]="['/']"><i class="fa fa-sign-out fa-2x" style="color:white;"></i></a>
+          </li>
+          
+        
+      </ul>
+    </div>
+  </nav>
