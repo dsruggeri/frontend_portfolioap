@@ -1,8 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { resetFakeAsyncZone } from '@angular/core/testing';
 import { NgForm } from '@angular/forms';
 import { Educacion } from 'src/app/modelos/educacion';
 import { EducacionService } from 'src/app/servicios/educacion.service';
+import { TokenService } from 'src/app/servicios/token.service';
 
 @Component({
   selector: 'app-educacion',
@@ -14,13 +16,21 @@ export class EducacionComponent implements OnInit {
   public educacionLista:Educacion[]=[];
   public editEducacion:Educacion | undefined;
   public deleteEducacion:Educacion | undefined;
+  roles!:string[];
+  isAdmin= false;
 
   
 
-  constructor(private educacionService:EducacionService) { }
+  constructor(private educacionService:EducacionService, private tokenService:TokenService) { }
 
   ngOnInit(): void {
     this.getEducacion();
+    this.roles = this.tokenService.getAuthorities();
+    this.roles.forEach(rol => {
+      if(rol === 'ROLE_ADMIN'){
+        this.isAdmin=true;
+      }
+    });
   }
 
 
@@ -75,7 +85,7 @@ export class EducacionComponent implements OnInit {
 
   public onEditEducacion(educacion:Educacion){
     this.editEducacion=educacion;
-    document.getElementById('add-educacion-form')?.click();
+    document.getElementById('edit-educacion-form')?.click();
     this.educacionService.editEducacion(educacion).subscribe({
       next: (response:Educacion) =>{
         console.log(response);
@@ -84,6 +94,7 @@ export class EducacionComponent implements OnInit {
       },
       error:(error:HttpErrorResponse)=>{
         alert(error.message);
+        
         
       }
     })

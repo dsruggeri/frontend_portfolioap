@@ -7,4 +7,6 @@ export interface Educacion{
     descripcionEducacion:string;
     imagenEducacion:string;
 
+
+
 }

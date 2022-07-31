@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Habilidad } from 'src/app/modelos/habilidad';
 import { HabilidadService } from 'src/app/servicios/habilidad.service';
+import { TokenService } from 'src/app/servicios/token.service';
 
 @Component({
   selector: 'app-habilidad',
@@ -14,11 +15,21 @@ export class HabilidadComponent implements OnInit {
   public habilidadLista:Habilidad[]=[];
   public editHabilidad:Habilidad | undefined;
   public deleteHabilidad:Habilidad | undefined;
+  roles!:string[];
+  isAdmin=false;
+  
+  
 
-  constructor(private habilidadService:HabilidadService) { }
+  constructor(private habilidadService:HabilidadService, private tokenService:TokenService) { }
 
   ngOnInit(): void {
     this.getHabilidad();
+    this.roles = this.tokenService.getAuthorities();
+    this.roles.forEach(rol => {
+      if(rol === 'ROLE_ADMIN'){
+        this.isAdmin=true;
+      }
+    });
   }
 
   public getHabilidad():void{
@@ -70,7 +81,7 @@ export class HabilidadComponent implements OnInit {
 
   public onEditHabilidad(habilidad:Habilidad){
     this.editHabilidad=habilidad;
-    document.getElementById('add-habilidad-form')?.click();
+    document.getElementById('edit-habilidad-form')?.click();
     this.habilidadService.editHabilidad(habilidad).subscribe({
       next: (response:Habilidad) =>{
         console.log(response);
@@ -95,6 +106,8 @@ export class HabilidadComponent implements OnInit {
       }
     })
   }
+
+ 
 
 
 }

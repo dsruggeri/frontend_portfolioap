@@ -1,96 +1,145 @@
-<!--botón a ModalLogin! /// cambia cuando se desloguea /// se muestra o no con "ngIf=""!isLogged"-->
-<!--                                el otro boton va con (click)="onLogout()"; y lo muesto si ngIf="isLogged""-->
 
-<div class="container fondo-banner">
-  <div class="row">
-    <div>
-      <nav class="navbar navbar-dark navbar-expand-md fixed-top">
-        <div class="container">
+<div class="container">
+<div class="card mb-3 mr-2 ml-2 text-bg-secondary mb-3" style="max-width:100%">
+  <div class="row g-0">
+    <div class="col-md-2">
+      <img src="{{ persona!.fotoPerfil }}" class="img-fluid" style="height: 98%;" alt="Diego Ruggeri Portfolio">
+    </div>
+    <div class="col-md-7">
+      <div class="card-body">
+        <h1 class="card-title">{{persona!.nombre}} {{persona!.apellido}}</h1>
+        <h4 class="card-text">{{persona!.titulo}}</h4>
+        <p class="card-text">{{persona!.descripcion}}</p>
+        <div *ngIf="isAdmin">
           <a
-            href="https://argentinaprograma.inti.gob.ar/"
-            target="blank"
-            class="navbar-brand"
+            (click)="onOpenModal('edit', persona)"
+            class="btn btn-primary tooltips"
+            data-placement="top"
+            data-bs-target="#editPersonaModal"
+            data-bs-toggle="modal"
+            data-toogle="tooltip"
+            data-origin-title="Editar"
           >
-            <img
-              src="https://res.cloudinary.com/dsruggeri/image/upload/v1658878562/portfolioAP/argentina_programa_logo_mefli2.png"
-              alt="Argentina Programa"
-              width="130"
-              height="auto"
-          /></a>
-
-          <button
-            type="button"
-            class="navbar-toggler"
-            data-toggle="collapse"
-            data-target="#menu-principal"
-            aria-controls="menu-principal"
-            aria-expanded="false"
-            aria-label="Desplegar menú"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div
-            class="collpase navbar-collapse d-flex justify-content-end"
-            id="menu-principal"
-          >
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item p-3">
-                <a
-                  href="https://github.com/dsruggeri"
-                  class="nav-link"
-                  target="_blank"
-                >
-                  <img
-                    src="https://res.cloudinary.com/dsruggeri/image/upload/v1658878562/portfolioAP/github_logo_vcsdh8.png"
-                    alt="Github"
-                    width="40"
-                    height="auto"
-                    class="rounded"
-                  />
-                </a>
-              </li>
-              <li class="nav-item p-3">
-                <a class="nav-link" href="#">
-                  <img
-                    src="https://res.cloudinary.com/dsruggeri/image/upload/v1658878562/portfolioAP/linkedin_logo_ebjzih.png"
-                    alt="LinkedIn"
-                    width="40"
-                    height="auto"
-                    class="rounded"
-                  />
-                </a>
-              </li>
-              <li *ngIf="!isLogged" class="nav-item p-3">
-                <button
-                  type="button"
-                  class="btn"
-                  (click)="onOpenModal('login')"
-                  data-bs-toggle="modal"
-                  bata-bs-target="#loginModal"
-                >
-                  <a class="nav-link btn btn-lg btn-dark"> Login </a>
-                </button>
-              </li>
-              <li *ngIf="isLogged" class="nav-item p-3">
-                <button type="button" class="btn" (click)="onLogout()">
-                  <a class="nav-link btn btn-lg btn-dark"> Cerrar Sesión </a>
-                </button>
-              </li>
-            </ul>
-          </div>
+            <i class="fa fa-edit"></i>
+          </a>
         </div>
-      </nav>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-4" *ngIf="usuario">
-        <img class="m-4" src="{{ usuario.fotoPerfil }}" alt="Diego Ruggeri">
-    </div>
-    <div class="col-8" *ngIf="usuario">
-        <h1>{{ usuario.nombre }} {{ usuario.apellido }}</h1>
-        
+      </div>
     </div>
   </div>
 </div>
+</div>
+
+<!-- MODAL EDITAR PERSONA! -->
+<div
+  class="modal"
+  id="editPersonaModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="PersonaEditModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editPersonaModalLabel">
+          Editar {{ editPersona?.nombre }} {{editPersona?.apellido}}
+        </h5>
+        <button
+          class="close"
+          type="button"
+          data-bs-dismiss="modal"
+          aria-label="close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <input
+            type="number"
+            ngModel="{{ editPersona?.id }}"
+            name="id"
+            class="form-control"
+            id="id"
+            placeholder="{{editPersona?.id}}"
+            style="display: none;"
+          />
+          <div class="form-group">
+            <label for="tituloHabilidad">Nombre</label>
+            <input
+              type="text"
+              ngModel="{{ editPersona?.nombre }}"
+              name="nombre"
+              class="form-control"
+              id="nombre"
+              placeholder="nombre"
+            />
+          </div>
+          <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input
+              type="text"
+              ngModel="{{ editPersona?.apellido }}"
+              name="apellido"
+              class="form-control"
+              id="apellido"
+              placeholder="{{ editPersona?.apellido }}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="titulo">Título</label>
+            <input
+              type="text"
+              ngModel="{{ editPersona?.titulo }}"
+              name="titulo"
+              class="form-control"
+              id="titulo"
+              placeholder="{{ editPersona?.titulo }}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <input
+              type="text"
+              ngModel="{{ editPersona?.descripcion}}"
+              name="descripcion"
+              class="form-control"
+              id="descripcion"
+              placeholder="{{ editPersona?.descripcion}}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="imagenHabilidad">Url de la imagen</label>
+            <input
+              type="text"
+              ngModel="{{ editPersona?.fotoPerfil}}"
+              name="fotoPerfil"
+              class="form-control"
+              id="fotoPerfil"
+              placeholder="{{ editPersona?.fotoPerfil}}"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              id=""
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button
+              (click)="onEditPersona(editForm.value)"
+              data-bs-dismiss="modal"
+              class="btn btn-primary"
+            >
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 

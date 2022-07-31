@@ -1,8 +1,10 @@
+
 <div class="container">
-  <div class="row">
-    <div class="col-2"><h2>Educación</h2></div>
-    <div class="col-10">
-      <button
+<table class="table table-success table-striped table-hover align-middle">
+  <thead>
+    <th colspan="4">
+      <h4 class="pb-0 mb-0">Educación <span *ngIf="isAdmin" class="align-middle ">
+        <button
         type="button"
         class="btn btn-success"
         (click)="onOpenModal('add')"
@@ -10,66 +12,49 @@
         data-bs-target="#addEducacionModal"
       >
         <a class="nav-link" style="color: rgb(221, 222, 237)">
-          Añadir Educación <span class="sr-only">(current)</span>
+          Agregar Educación <i class="fa fa-plus"></i> <span class="sr-only">(current)</span>
         </a>
       </button>
-    </div>
-  </div>
-</div>
-<div class="container" *ngFor="let educacion of educacionLista">
-  <div class="row">
-    <div class="col-3">
-      <img src="{{ educacion.imagenEducacion }}" alt="" />
-    </div>
-    <div class="col-3">{{ educacion.descripcionEducacion }}</div>
-    <div class="col-2">{{ educacion.periodo }}</div>
-    <div class="col-2">{{ educacion.tituloEducacion }}</div>
-    <div class="col-2">
-      <a
-        (click)="onOpenModal('edit', educacion)"
-        class="btn btn-primary tooltips"
-        data-placement="top"
-        data-bs-target="#editEducacionModal"
-        data-bs-toggle="modal"
-        data-toogle="tooltip"
-        data-origin-title="Editar"
-      >
-        <i class="fa fa-pencil"></i>
-      </a>
-      <a
-        (click)="onOpenModal('delete', educacion)"
-        class="btn btn-danger tooltips"
-        data-placement="top"
-        data-toogle="tooltip"
-        data-bs-target="#deleteEducacionModal"
-        data-bs-toggle="modal"
-        data-origin-title="Delete"
-      >
-        <i class="fa fa-times"></i>
-      </a>
-    </div>
-  </div>
+      </span></h4>
+    </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let educacion of educacionLista">
+      <th class="align-items-center " class="align-items-center"><img src="{{ educacion.imagenEducacion }}" alt="" /></th>
+      <th class="align-items-center" class="align-items-center"> <h5 >{{ educacion.tituloEducacion }}</h5></th>
+      <td><p class="align-items-center">{{ educacion.descripcionEducacion }}</p></td>
+      <td class="align-items-center"><p class="align-items-center">{{ educacion.periodo }}</p></td>
+      <td *ngIf="isAdmin">
+        
+          <a
+            (click)="onOpenModal('edit', educacion)"
+            class="btn btn-primary tooltips"
+            data-placement="top"
+            data-bs-target="#editEducacionModal"
+            data-bs-toggle="modal"
+            data-toogle="tooltip"
+            data-origin-title="Editar"
+          >
+            <i class="fa fa-edit"></i>
+          </a>
+          <a
+            (click)="onOpenModal('delete', educacion)"
+            class="btn btn-danger"
+            data-placement="top"
+            data-toogle="tooltip"
+            data-bs-target="#deleteEducacionModal"
+            data-bs-toggle="modal"
+            data-origin-title="Delete"
+          >
+            <i class="fa fa-trash"></i>
+          </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 </div>
 
-<!--modal añadir educación v2
-<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
--->
+
 
 <!-- MODAL AÑADIR EDUCACION -->
 <div
@@ -91,7 +76,7 @@
           class="close"
           data-bs-dismiss="modal"
           aria-label="Close"
-        >X</button>
+        ><i class="fa fa-close fs-2x"></i></button>
       </div>
       <div class="modal-body">
         <form #addForm="ngForm" (ngSubmit)="onAddEducacion(addForm)">
@@ -151,7 +136,7 @@
               Cerrar
             </button>
             <button
-              (click)="onAddEducacion(addForm.value)"
+              
               id="add-educacion-form"
               [disabled]="addForm.invalid"
               type="submit"
@@ -193,11 +178,13 @@
       <div class="modal-body">
         <form #editForm="ngForm">
           <input
-            type="hidden"
+            type="number"
             ngModel="{{ editEducacion?.idEducacion }}"
+            name="idEducacion"
             class="form-control"
             id="idEducacion"
-            placeholder=""
+            placeholder="{{ editEducacion?.idEducacion }}"
+            style="display: none;"
           />
           <div class="form-group">
             <label for="tituloEducacion">Título</label>
@@ -207,7 +194,7 @@
               name="tituloEducacion"
               class="form-control"
               id="tituloEducacion"
-              placeholder="Título"
+              placeholder="{{editEducacion?.tituloEducacion}}"
             />
           </div>
           <div class="form-group">
@@ -254,6 +241,7 @@
             </button>
             <button
               (click)="onEditEducacion(editForm.value)"
+              type="submit"
               data-bs-dismiss="modal"
               class="btn btn-primary"
             >

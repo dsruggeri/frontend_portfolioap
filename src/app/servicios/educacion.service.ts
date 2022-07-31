@@ -21,7 +21,7 @@ export class EducacionService {
   }
 
   public editEducacion(educacion:Educacion):Observable<Educacion>{
-    return this.http.put<Educacion>(`${this.apiServerUrl}/educacion/update`,educacion);
+    return this.http.put<Educacion>(`${this.apiServerUrl}/educacion/update/${educacion.idEducacion}`,educacion);
   }
 
   public deleteEducacion(idEducacion:number):Observable<void>{

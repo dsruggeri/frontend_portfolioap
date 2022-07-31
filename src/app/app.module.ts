@@ -8,7 +8,17 @@ import { FormsModule } from '@angular/forms';
 import { EducacionComponent } from './componentes/educacion/educacion.component';
 import { HabilidadComponent } from './componentes/habilidad/habilidad.component';
 import { ExperienciaComponent } from './componentes/experiencia/experiencia.component';
-import { LoginComponent } from './componentes/login/login.component';
+import { LoginComponent } from './auth/login.component';
+import { NuevoUserComponent } from './auth/nuevo-user.component';
+import { MenuComponent } from './menu/menu.component';
+import { interceptorProviderEducacion } from './interceptors/educacion-interceptor.service';
+import { interceptorProviderExperiencia } from './interceptors/experiencia-interceptor.service';
+import { interceptorProviderHabilidad } from './interceptors/habilidad-interceptor.service';
+import { HomeComponent } from './componentes/home/home.component';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -17,15 +27,23 @@ import { LoginComponent } from './componentes/login/login.component';
     EducacionComponent,
     HabilidadComponent,
     ExperienciaComponent,
-    LoginComponent
+    LoginComponent,
+    NuevoUserComponent,
+    MenuComponent,
+    HomeComponent
+
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+
   ],
-  providers: [],
+  providers: [interceptorProviderEducacion, 
+              interceptorProviderExperiencia, 
+                interceptorProviderHabilidad],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,55 +1,57 @@
 <div class="container">
-    <div class="row">
-      <div class="col-2"><h2>Experiencia</h2></div>
-      <div class="col-10">
+<table class="table table-success table-striped table-hover align-middle">
+  <thead>
+    <th colspan="4">
+      <h4 class="pb-0 mb-0">Experiencia <span *ngIf="isAdmin" class="align-middle ">
         <button
-          type="button"
-          class="btn btn-success"
-          (click)="onOpenModal('add')"
-          data-bs-toggle="modal"
-          data-bs-target="#addExperienciaModal"
-        >
-          <a class="nav-link" style="color: rgb(221, 222, 237)">
-            Añadir Experiencia <span class="sr-only">(current)</span>
+        type="button"
+        class="btn btn-success"
+        (click)="onOpenModal('add')"
+        data-bs-toggle="modal"
+        data-bs-target="#addExperienciaModal"
+      >
+        <a class="nav-link" style="color: rgb(221, 222, 237)">
+          Agregar Experiencia <i class="fa fa-plus"></i> <span class="sr-only">(current)</span>
+        </a>
+      </button>
+      </span></h4>
+    </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let experiencia of experienciaLista">
+      <th class="align-items-center " class="align-items-center"><img src="{{ experiencia.imagenExperiencia }}" alt="" /></th>
+      <th class="align-items-center" class="align-items-center"> <h5 >{{ experiencia.tituloExperiencia }}</h5></th>
+      <td><p class="align-items-center">{{ experiencia.descripcionExperiencia }}</p></td>
+      <td class="align-items-center"><p class="align-items-center">{{ experiencia.fecha }}</p></td>
+      <td *ngIf="isAdmin">
+        
+          <a
+            (click)="onOpenModal('edit', experiencia)"
+            class="btn btn-primary tooltips"
+            data-placement="top"
+            data-bs-target="#editExperienciaModal"
+            data-bs-toggle="modal"
+            data-toogle="tooltip"
+            data-origin-title="Editar"
+          >
+            <i class="fa fa-edit"></i>
           </a>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="container" *ngFor="let experiencia of experienciaLista">
-    <div class="row">
-      <div class="col-3">
-        <img src="{{ experiencia.imagenExperiencia }}" alt="" />
-      </div>
-      <div class="col-3">{{ experiencia.descripcionExperiencia }}</div>
-      <div class="col-2">{{ experiencia.fecha }}</div>
-      <div class="col-2">{{ experiencia.tituloExperiencia }}</div>
-      <div class="col-2">
-        <a
-          (click)="onOpenModal('edit', experiencia)"
-          class="btn btn-primary tooltips"
-          data-placement="top"
-          data-bs-target="#editExperienciaModal"
-          data-bs-toggle="modal"
-          data-toogle="tooltip"
-          data-origin-title="Editar"
-        >
-          <i class="fa fa-pencil"></i>
-        </a>
-        <a
-          (click)="onOpenModal('delete', experiencia)"
-          class="btn btn-danger tooltips"
-          data-placement="top"
-          data-toogle="tooltip"
-          data-bs-target="#deleteExperienciaModal"
-          data-bs-toggle="modal"
-          data-origin-title="Delete"
-        >
-          <i class="fa fa-times"></i>
-        </a>
-      </div>
-    </div>
-  </div>
+          <a
+            (click)="onOpenModal('delete', experiencia)"
+            class="btn btn-danger"
+            data-placement="top"
+            data-toogle="tooltip"
+            data-bs-target="#deleteExperienciaModal"
+            data-bs-toggle="modal"
+            data-origin-title="Delete"
+          >
+            <i class="fa fa-trash"></i>
+          </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
   <!-- MODAL AÑADIR EXPERIENCIA -->
 <div
@@ -131,7 +133,7 @@ aria-hidden="true"
             Cerrar
           </button>
           <button
-            (click)="onAddExperiencia(addForm.value)"
+            
             id="add-experiencia-form"
             [disabled]="addForm.invalid"
             type="submit"
@@ -173,11 +175,13 @@ aria-hidden="true"
       <div class="modal-body">
         <form #editForm="ngForm">
           <input
-            type="hidden"
+            type="number"
             ngModel="{{ editExperiencia?.idExperiencia }}"
+            name="idExperiencia"
             class="form-control"
             id="idExperiencia"
-            placeholder=""
+            placeholder="{{ editExperiencia?.idExperiencia }}"
+            style="display:none;"
           />
           <div class="form-group">
             <label for="tituloExperiencia">Título</label>

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Experiencia } from 'src/app/modelos/experiencia';
 import { ExperienciaService } from 'src/app/servicios/experiencia.service';
+import { TokenService } from 'src/app/servicios/token.service';
 
 @Component({
   selector: 'app-experiencia',
@@ -15,11 +16,19 @@ export class ExperienciaComponent implements OnInit {
   public experienciaLista:Experiencia[]=[];
   public editExperiencia:Experiencia | undefined;
   public deleteExperiencia:Experiencia | undefined;
+  roles!: string[];
+  isAdmin = false;
 
-  constructor(private experienciaService:ExperienciaService) { }
+  constructor(private experienciaService:ExperienciaService, private tokenService:TokenService) { }
 
   ngOnInit(): void {
     this.getExperiencia();
+    this.roles = this.tokenService.getAuthorities();
+    this.roles.forEach(rol => {
+      if(rol === 'ROLE_ADMIN'){
+        this.isAdmin=true;
+      }
+    });
   }
 
   public getExperiencia():void{
@@ -72,7 +81,7 @@ export class ExperienciaComponent implements OnInit {
 
   public onEditExperiencia(experiencia:Experiencia){
     this.editExperiencia=experiencia;
-    document.getElementById('add-experiencia-form')?.click();
+    document.getElementById('edit-experiencia-form')?.click();
     this.experienciaService.editExperiencia(experiencia).subscribe({
       next: (response:Experiencia) =>{
         console.log(response);

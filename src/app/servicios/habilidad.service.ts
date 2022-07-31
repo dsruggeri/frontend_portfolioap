@@ -9,6 +9,7 @@ import { Habilidad } from '../modelos/habilidad';
 })
 export class HabilidadService {
   private apiServerUrl=environment.apiBaseUrl;
+  
 
   constructor(private http:HttpClient) { }
 
@@ -22,12 +23,14 @@ export class HabilidadService {
   }
 
   public editHabilidad(habilidad:Habilidad):Observable<Habilidad>{
-    return this.http.put<Habilidad>(`${this.apiServerUrl}/habilidad/update`,habilidad);
+    return this.http.put<Habilidad>(`${this.apiServerUrl}/habilidad/update/${habilidad.idHabilidad}`,habilidad);
   }
 
   public deleteHabilidad(idHabilidad:number):Observable<void>{
     return this.http.delete<void>(`${this.apiServerUrl}/habilidad/delete/${idHabilidad}`);
   }
+
+
 
 
 }
