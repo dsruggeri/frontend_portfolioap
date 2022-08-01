@@ -8,7 +8,7 @@ import { Habilidad } from '../modelos/habilidad';
   providedIn: 'root'
 })
 export class HabilidadService {
-  private apiServerUrl=environment.apiBaseUrl;
+  private apiServerUrl='https://portfoliodsr.herokuapp.com';
   
 
   constructor(private http:HttpClient) { }

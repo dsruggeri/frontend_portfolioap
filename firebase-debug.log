@@ -1,21 +1,44 @@
-[debug] [2022-07-31T19:13:43.611Z] ----------------------------------------------------------------------
-[debug] [2022-07-31T19:13:43.613Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\dsrug\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
-[debug] [2022-07-31T19:13:43.614Z] CLI Version:   11.4.0
-[debug] [2022-07-31T19:13:43.614Z] Platform:      win32
-[debug] [2022-07-31T19:13:43.614Z] Node Version:  v16.13.1
-[debug] [2022-07-31T19:13:43.615Z] Time:          Sun Jul 31 2022 16:13:43 GMT-0300 (hora estándar de Argentina)
-[debug] [2022-07-31T19:13:43.616Z] ----------------------------------------------------------------------
+[debug] [2022-07-31T23:13:15.490Z] ----------------------------------------------------------------------
+[debug] [2022-07-31T23:13:15.492Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\dsrug\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-07-31T23:13:15.493Z] CLI Version:   11.4.0
+[debug] [2022-07-31T23:13:15.493Z] Platform:      win32
+[debug] [2022-07-31T23:13:15.493Z] Node Version:  v16.13.1
+[debug] [2022-07-31T23:13:15.494Z] Time:          Sun Jul 31 2022 20:13:15 GMT-0300 (hora estándar de Argentina)
+[debug] [2022-07-31T23:13:15.494Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2022-07-31T19:13:43.627Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2022-07-31T19:13:43.628Z] > authorizing via signed-in user (dsruggeri@gmail.com)
+[debug] [2022-07-31T23:13:15.586Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-07-31T23:13:15.587Z] > authorizing via signed-in user (dsruggeri@gmail.com)
+[debug] [2022-07-31T23:13:15.587Z] [iam] checking project portfoliodsrap for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-07-31T23:13:15.590Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoliodsrap:testIamPermissions [none]
+[debug] [2022-07-31T23:13:15.590Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoliodsrap:testIamPermissions x-goog-quota-user=projects/portfoliodsrap
+[debug] [2022-07-31T23:13:15.590Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoliodsrap:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-07-31T23:13:16.537Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoliodsrap:testIamPermissions 200
+[debug] [2022-07-31T23:13:16.537Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfoliodsrap:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-07-31T23:13:16.539Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/portfoliodsrap [none]
+[debug] [2022-07-31T23:13:16.872Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/portfoliodsrap 200
+[debug] [2022-07-31T23:13:16.873Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/portfoliodsrap {"projectId":"portfoliodsrap","projectNumber":"705549987763","displayName":"portfoliodsrap","name":"projects/portfoliodsrap","resources":{"hostingSite":"portfoliodsrap"},"state":"ACTIVE","etag":"1_3410bde3-5f9c-46fc-929f-ab59dec16f04"}
 [info] 
-     ######## #### ########  ######## ########     ###     ######  ########
-     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
-     ######    ##  ########  ######   ########  #########  ######  ######
-     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
-     ##       #### ##     ## ######## ########  ##     ##  ######  ########
-
-You're about to initialize a Firebase project in this directory:
-
-  C:\Users\dsrug\Documents\Argentina Programa\portfolioap\apfront
-
+[info] === Deploying to 'portfoliodsrap'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2022-07-31T23:13:16.881Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/portfoliodsrap [none]
+[debug] [2022-07-31T23:13:17.850Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/portfoliodsrap 200
+[debug] [2022-07-31T23:13:17.850Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/portfoliodsrap {"projectId":"portfoliodsrap","projectNumber":"705549987763","displayName":"portfoliodsrap","name":"projects/portfoliodsrap","resources":{"hostingSite":"portfoliodsrap"},"state":"ACTIVE","etag":"1_3410bde3-5f9c-46fc-929f-ab59dec16f04"}
+[debug] [2022-07-31T23:13:17.853Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/705549987763/sites/portfoliodsrap/versions [none]
+[debug] [2022-07-31T23:13:17.853Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/705549987763/sites/portfoliodsrap/versions {"config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2022-07-31T23:13:19.083Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/705549987763/sites/portfoliodsrap/versions 500
+[debug] [2022-07-31T23:13:19.083Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/705549987763/sites/portfoliodsrap/versions {"error":{"code":500,"message":"Internal error encountered.","status":"INTERNAL"}}
+[error] 
+[error] Error: HTTP Error: 500, Internal error encountered.
+[debug] [2022-07-31T23:13:19.211Z] Error Context: {
+  "body": {
+    "error": {
+      "code": 500,
+      "message": "Internal error encountered.",
+      "status": "INTERNAL"
+    }
+  },
+  "response": {
+    "statusCode": 500
+  }
+}
